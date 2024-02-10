@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import './App.css'
+import './styles/reset.css'
 
 function App() {
 
   return (
     <>
+    Example Text.
     </>
   )
 }
