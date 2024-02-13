@@ -1,0 +1,55 @@
+:root{
+    --Form_pad-small: .15em;
+    --Form_pad-med: .25em;
+    --Form_pad-large: .5em;
+    --Form_pad-xlarge:.75em;
+
+    --Form_tint-dark-low:rgba(0,0,0,.2);
+    --Form_tint-light-low:rgba(255,255,255,.1);
+
+    --Form_default_border:5px;
+}
+
+.Section {
+    padding: var(--Form_pad-large);
+}
+
+.TitleInput {
+    padding: var(--Form_pad-med);
+}
+
+.TitleInput>h1 {
+    padding: var(--Form_pad-small);
+}
+
+.AddItemButton {}
+
+.ContactInfo {}
+
+.Skills {}
+.Skills > input {
+    margin: var(--Form_pad-small);
+}
+
+.Education {}
+
+.Education-selected{
+    background-color:var(--Form_tint-dark-low);
+    border-radius: var(--Form_default_border);
+
+}
+.Education-not-selected, .Education > button{
+    margin-top: var(--Form_pad-large);
+    margin-left: var(--Form_pad-small);
+    padding: var(--Form_pad-xlarge);
+
+    cursor:pointer;
+
+    border-radius: var(--Form_default_border);
+    border: 1px grey solid;
+}
+.Education-not-selected:hover{
+    background-color: var(--Form_tint-light-low);
+}
+
+.Employment {}

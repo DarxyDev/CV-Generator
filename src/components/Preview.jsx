@@ -68,7 +68,7 @@ function Education({formData}){
                         <h2>{item.degree}</h2>
                         <h3>{item.school}</h3>
                         <p>{item.startYear ? item.startYear.toString() + ' - ' : ''}{item.endYear}</p>
-
+                        <br/>
                     </li>
                 )
             })}
@@ -77,16 +77,16 @@ function Education({formData}){
 }
 function Employment({formData}){
     return (
-        <ul>
+        <ul className='Employment'>
             {formData.workHistory.map(item=>{
                 return(
-                    <li key={item.key}>
+                    <li key={item.id}>
                         <h2>{item.position}</h2>
                         <h4>{item.startYear} - {item.endYear}</h4>
                         <p>{item.address}, {item.city}, {item.state}</p>
                         <p>p: {item.phone}</p>
-                        <br/>
                         <p>{item.description}</p>
+                        <br/>
                     </li>
                 )
             })}

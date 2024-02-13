@@ -19,6 +19,13 @@ const defaultFormData = {
             startYear: '2012',
             endYear: '2016',
             id: uuid(),
+        },
+        {
+            school: 'Gargoule High',
+            degree: 'High School Diploma',
+            startYear: '2008',
+            endYear: '2012',
+            id: uuid(),
         }
     ],
     workHistory: [
