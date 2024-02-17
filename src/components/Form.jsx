@@ -99,7 +99,7 @@ function SelectableCategory({ children, onAddItem, categoryChildIndex = 0, value
                     </div>
                 )
             })}
-            <AddItemButton onClick={(e)=>{
+            <AddItemButton onClick={(e) => {
                 setCurrentIndex(children.length);
                 onAddItem(e);
             }} />
@@ -107,7 +107,7 @@ function SelectableCategory({ children, onAddItem, categoryChildIndex = 0, value
     )
 }
 function Education({ formData, setFormData }) {
-    const [currentIndex, setCurrentIndex] = useState(0);
+    //const [currentIndex, setCurrentIndex] = useState(0);
     function onChange(e, index, formKey) {
         const newFormData = { ...formData };
         newFormData.education[index][formKey] = e.target.value;
@@ -124,27 +124,23 @@ function Education({ formData, setFormData }) {
         const newFormData = { ...formData };
         newFormData.education.push(newEducation);
         setFormData(newFormData);
-        setCurrentIndex(newFormData.education.length - 1);
+        //setCurrentIndex(newFormData.education.length - 1);
     }
     return (
         <div className='Education'>
-            {formData.education.map((item, index) => {
-                if (index === currentIndex)
+            <SelectableCategory onAddItem={onAddEducation}>
+                {formData.education.map((item, index) => {
                     return (
-                        <div key={item.id} className='Education-selected'>
+                        <div key={item.id}>
                             <TitleInput title='Degree' value={item.degree} onChange={(e) => { onChange(e, index, 'degree') }} />
                             <TitleInput title='School' value={item.school} onChange={(e) => { onChange(e, index, 'school') }} />
                             <TitleInput title='Year Started' value={item.startYear} onChange={(e) => { onChange(e, index, 'startYear') }} />
                             <TitleInput title='Year Completed' value={item.endYear} onChange={(e) => { onChange(e, index, 'endYear') }} />
                         </div>
                     )
-                else return (
-                    <div key={item.id} className='Education-not-selected' onClick={(e) => { setCurrentIndex(index) }}>
-                        {item.degree}
-                    </div>
-                )
-            })}
-            <AddItemButton onClick={onAddEducation} />
+                })}
+
+            </SelectableCategory>
         </div>
     )
 }
@@ -154,17 +150,17 @@ function WorkHistory({ formData, setFormData }) {
         newFormData.workHistory[index][formKey] = e.target.value;
         setFormData(newFormData);
     }
-    function onAddItem(e){
+    function onAddWorkHistory(e) {
         const newWorkObj = {};
-        Object.keys(formData.workHistory[0]).forEach(key=>newWorkObj[key] = '');
+        Object.keys(formData.workHistory[0]).forEach(key => newWorkObj[key] = '');
         newWorkObj.key = uuid();
 
-        const newFormData = {...formData};
+        const newFormData = { ...formData };
         newFormData.workHistory.push(newWorkObj)
         setFormData(newFormData);
     }
     return (
-        <SelectableCategory onAddItem={onAddItem}>
+        <SelectableCategory onAddItem={onAddWorkHistory}>
             {formData.workHistory.map((item, index) => {
                 return (
                     <div key={item.id}>
