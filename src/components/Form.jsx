@@ -8,19 +8,20 @@ export default function Form({ formData, setFormData }) {
     return (
         <div className='left-half main-section'>
             <Section title='Contact Info'>
-                <ContactInfo {...childProps}/>
+                <ContactInfo {...childProps} />
             </Section>
             <Section title='Skills'>
-                <Skills {...childProps}/>
+                <Skills {...childProps} />
             </Section>
             <Section title='Education'>
-            <Education {...childProps} />
+                <Education {...childProps} />
             </Section>
+            <WorkHistory {...childProps} />
         </div>
     )
 }
 //////
-function Section({title, children}){
+function Section({ title, children }) {
     return (
         <div className='Section'>
             <h1>{title}</h1>
@@ -83,7 +84,28 @@ function Skills({ formData, setFormData }) {
         </div>
     )
 }
-
+function SelectableCategory({ children, onAddItem, categoryChildIndex = 0, valueKey = 'value' }) {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    return (
+        <div>
+            {children.map((child, index) => {
+                if (index === currentIndex)
+                    return (
+                        child
+                    )
+                return (
+                    <div key={child.key + "subCategory"} className='Education-not-selected' onClick={(e) => { setCurrentIndex(index) }}>
+                        {child.props.children[categoryChildIndex].props[valueKey]}
+                    </div>
+                )
+            })}
+            <AddItemButton onClick={(e)=>{
+                setCurrentIndex(children.length);
+                onAddItem(e);
+            }} />
+        </div>
+    )
+}
 function Education({ formData, setFormData }) {
     const [currentIndex, setCurrentIndex] = useState(0);
     function onChange(e, index, formKey) {
@@ -124,6 +146,40 @@ function Education({ formData, setFormData }) {
             })}
             <AddItemButton onClick={onAddEducation} />
         </div>
+    )
+}
+function WorkHistory({ formData, setFormData }) {
+    function onChange(e, index, formKey) {
+        const newFormData = { ...formData };
+        newFormData.workHistory[index][formKey] = e.target.value;
+        setFormData(newFormData);
+    }
+    function onAddItem(e){
+        const newWorkObj = {};
+        Object.keys(formData.workHistory[0]).forEach(key=>newWorkObj[key] = '');
+        newWorkObj.key = uuid();
+
+        const newFormData = {...formData};
+        newFormData.workHistory.push(newWorkObj)
+        setFormData(newFormData);
+    }
+    return (
+        <SelectableCategory onAddItem={onAddItem}>
+            {formData.workHistory.map((item, index) => {
+                return (
+                    <div key={item.id}>
+                        <TitleInput title='Position' value={item.position} onChange={(e) => { onChange(e, index, 'position') }} />
+                        <TitleInput title='Address' value={item.address} onChange={(e) => { onChange(e, index, 'address') }} />
+                        <TitleInput title='Phone' value={item.phone} onChange={(e) => { onChange(e, index, 'phone') }} />
+                        <TitleInput title='City' value={item.city} onChange={(e) => { onChange(e, index, 'city') }} />
+                        <TitleInput title='State' value={item.state} onChange={(e) => { onChange(e, index, 'state') }} />
+                        <TitleInput title='Year Started' value={item.startYear} onChange={(e) => { onChange(e, index, 'startYear') }} />
+                        <TitleInput title='Year Left' value={item.endYear} onChange={(e) => { onChange(e, index, 'endYear') }} />
+                        <TitleInput title='Short Description' value={item.description} onChange={(e) => { onChange(e, index, 'description') }} />
+                    </div>
+                )
+            })}
+        </SelectableCategory>
     )
 }
 
