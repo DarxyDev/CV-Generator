@@ -87,14 +87,17 @@ function Skills({ formData, setFormData }) {
 function SelectableCategory({ children, onAddItem, categoryChildIndex = 0, valueKey = 'value' }) {
     const [currentIndex, setCurrentIndex] = useState(0);
     return (
-        <div>
+        <div className='SC'>
             {children.map((child, index) => {
-                if (index === currentIndex)
+                if (index === currentIndex) {
                     return (
-                        child
+                        <div key={child.key + 'selectedCategory'} className='SC_selected'>
+                            {child}
+                        </div>
                     )
+                }
                 return (
-                    <div key={child.key + "subCategory"} className='Education-not-selected' onClick={(e) => { setCurrentIndex(index) }}>
+                    <div key={child.key + "subCategory"} className='SC_not-selected' onClick={(e) => { setCurrentIndex(index) }}>
                         {child.props.children[categoryChildIndex].props[valueKey]}
                     </div>
                 )
@@ -107,7 +110,6 @@ function SelectableCategory({ children, onAddItem, categoryChildIndex = 0, value
     )
 }
 function Education({ formData, setFormData }) {
-    //const [currentIndex, setCurrentIndex] = useState(0);
     function onChange(e, index, formKey) {
         const newFormData = { ...formData };
         newFormData.education[index][formKey] = e.target.value;
@@ -124,7 +126,6 @@ function Education({ formData, setFormData }) {
         const newFormData = { ...formData };
         newFormData.education.push(newEducation);
         setFormData(newFormData);
-        //setCurrentIndex(newFormData.education.length - 1);
     }
     return (
         <div className='Education'>
