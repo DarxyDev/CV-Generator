@@ -11,7 +11,7 @@ function Page({ formData }) {
     const childProps = { formData }
     return (
         <div className='Page-container'>
-            <div className='Page' style={{aspectRatio:1/1}}>
+            <div className='Page'>
                 <h1>{formData.firstName + ' ' + formData.lastName}</h1>
                 <br />
                 <ContactInfo {...childProps} />
