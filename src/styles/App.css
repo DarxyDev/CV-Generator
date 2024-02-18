@@ -22,8 +22,8 @@ html, body, #root{
     min-height:100%;
 }
 .right-half{
-    width:60%;
-    height:100%;
+    width:calc(60%);
+    height:calc(100% );
 }
 .main-section{
     box-sizing:border-box;

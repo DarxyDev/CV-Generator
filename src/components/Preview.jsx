@@ -6,14 +6,19 @@ const PAGE_RATIO = 1 / 1.414;
 let resizeAdded = false;
 export default function Preview({ formData }) {
     const [pageSettings, setPageSettings] = useState({
-        scale: .95,
+        scale: .9,
+        color1: '#7a84f8',
+        color2: '#bac6f5',
+        color3: '#f2f4ff',
+        fontSize: 18,
     })
     if (!(resizeAdded = false) && onLoadResize(pageSettings))
         window.onresize = (e) => { onWindowResize(pageSettings) };
     return (
         <div className='right-half main-section Preview'>
-            <PageSettings {...{ pageSettings, setPageSettings }} />
-            <Page formData={formData}></Page>
+            <PageSettings {...{ pageSettings, setPageSettings,color1:1,color2:1,color3:1 }} />
+            <Page {...{ formData, pageSettings }}></Page>
+            <PageSettings {...{ pageSettings, setPageSettings, scale:1, fontSettings:1}} />
         </div>
     )
 }
@@ -28,7 +33,7 @@ const onWindowResize = (settings) => {
 
     page.style.height = newHeight + 'px';
     page.style.width = newWidth + 'px';
-    page.style.fontSize = (settings.scale * 2) + 'vh';
+    page.style.fontSize = (newHeight * settings.fontSize / 1000) + 'px';
 };
 
 function onLoadResize(settings) {
@@ -39,36 +44,77 @@ function onLoadResize(settings) {
     return true;
 }
 
-function PageSettings({ pageSettings, setPageSettings }) {
-    function setScale(value) {
+function PageSettings({ pageSettings, setPageSettings, color1,color2,color3,scale,fontSettings }) {
+    function setScale(e) {
+        const value = ((e.target.value) / 100);
+        console.log(value)
         setPageSettings({ ...pageSettings, scale: value });
     }
+    function setFontSize(e){
+
+    }
+    function setColor1(e) {
+        const value = e.target.value;
+        setPageSettings({ ...pageSettings, color1: value })
+    }
+    function setColor2(e) {
+        const value = e.target.value;
+        setPageSettings({ ...pageSettings, color2: value })
+    }
+    function setColor3(e) {
+        const value = e.target.value;
+        setPageSettings({ ...pageSettings, color3: value })
+    }
     return (
-        <div>
-            <Slider value={pageSettings.scale} setValue={setScale} />
+        <div className='PageSettings'>
+            {scale && <Slider value={pageSettings.scale} setValue={setScale} />}
+            {color1 && <ColorSelect value={pageSettings.color1} setValue={setColor1} />}
+            {color2 && <ColorSelect value={pageSettings.color2} setValue={setColor2} />}
+            {color3 && <ColorSelect value={pageSettings.color3} setValue={setColor3} />}
+            {fontSettings && <FontSettings {...{pageSettings, setPageSettings}}/>}
+        </div>
+    )
+}
+function FontSettings({pageSettings, setPageSettings}){
+    function setFontSize(e){
+        const value = e.target.value
+        setPageSettings({ ...pageSettings, fontSize: value });
+    }
+    const fontOptions = [];
+    for(let i = 10; i < 65; i++){
+        fontOptions.push(<option value={i} key={i+"dslkfsdf94maslkdmfaslkdmc9smv3c"}>{i}</option>)
+    }
+    return (
+        <div className='FontSettings'>
+            <select value={pageSettings.fontSize}onChange={setFontSize}>
+                {fontOptions.map((item)=>item)}
+            </select>
         </div>
     )
 }
 function Slider({ value, setValue }) {
-    function onChange(e) {
-        setValue((e.target.value) / 100)
-    }
     return (
-        <input type='range' min={20} max={98} value={value * 100} onChange={onChange}></input>
+        <input type='range' min={20} max={98} value={value * 100} onChange={setValue}></input>
     )
 }
-function Page({ formData }) {
+function ColorSelect({ value, setValue }) {
+    return (
+        <div>
+            <input type='color' className='ColorSelectInput' onChange={setValue} value={value}></input>
+        </div>
+    )
+}
+function Page({ formData, pageSettings }) {
     const childProps = { formData }
     return (
         <div className='Page-container'>
             <div className='Page'>
-{/* 
-                <div className='section'></div> */}
-                <div className='section grid-span-2-col'>
+                <div className='section' style={{ backgroundColor: pageSettings.color1 }}></div>
+                <div className='section' style={{ backgroundColor: pageSettings.color1 }}>
                     <h1 className='name'>{formData.firstName + ' ' + formData.lastName}</h1>
                 </div>
 
-                <div className='flex-spread-col section'>
+                <div className='flex-spread-col section' style={{ backgroundColor: pageSettings.color2 }}>
                     <ContactInfo {...childProps} />
                     <div className='sub-section'>
                         <h3 className='section-title align-right'>Education</h3>
@@ -79,8 +125,11 @@ function Page({ formData }) {
                         <Skills {...childProps} />
                     </div>
                 </div>
-                <div className='flex-spread-col section'>
-                    <Summary {...childProps} />
+                <div className='flex-spread-col section' style={{ backgroundColor: pageSettings.color3 }}>
+                    <div className='sub-section'>
+                        <h3 className='section-title'>About me</h3>
+                        <Summary {...childProps} />
+                    </div>
                     <div className='sub-section'>
                         <h3 className='section-title'>Employment</h3>
                         <Employment {...childProps} />
