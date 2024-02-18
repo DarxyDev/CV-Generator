@@ -19,6 +19,9 @@ export default function Form({ formData, setFormData }) {
             <Section title='Previous Employment'>
                 <WorkHistory {...childProps} />
             </Section>
+            <Section title='About Yourself'>
+                <Summary {...childProps} />
+            </Section>
         </div>
     )
 }
@@ -47,6 +50,9 @@ function ContactInfo({ formData, setFormData }) {
             <TitleInput title='Last Name' value={formData.lastName} onChange={(e) => { onChange(e, 'lastName') }} />
             <TitleInput title='Email' value={formData.email} onChange={(e) => { onChange(e, 'email') }} />
             <TitleInput title='Phone' value={formData.phone} onChange={(e) => { onChange(e, 'phone') }} />
+            <TitleInput title='Address' value={formData.address} onChange={(e) => { onChange(e, 'address') }} />
+            <TitleInput title='City' value={formData.city} onChange={(e) => { onChange(e, 'city') }} />
+            <TitleInput title='State' value={formData.state} onChange={(e) => { onChange(e, 'state') }} />
         </div>
     )
 }
@@ -138,6 +144,16 @@ function WorkHistory({ formData, setFormData }) {
                     )
                 })}
             </SelectableCategory>
+        </div>
+    )
+}
+function Summary({formData, setFormData}){
+    function onChange(e){
+        setFormData({...formData,summary:e.target.value})
+    }
+    return (
+        <div>
+            <textarea className='description-input' rows='3' value = {formData.summary} onChange={onChange}/>
         </div>
     )
 }

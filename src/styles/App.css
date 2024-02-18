@@ -27,14 +27,10 @@ html, body, #root{
 }
 .main-section{
     box-sizing:border-box;
-    border-right:2px solid var(--tint-dark-30);
-    border-radius:1.5vmin;
+
     overflow:scroll;
 }
-.main-section:nth-child(2){
-    border-right:none;
-    border-left:2px solid var(--tint-dark-30);
-}
+
 .grid-2-col{
     display:grid;
     grid-template-columns: 1fr 1fr;
@@ -46,4 +42,22 @@ html, body, #root{
     display:flex;
     align-items: center;
     justify-content: center;
+}
+.flex-center-col{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.flex-spread-col{
+    display:flex;
+    gap:1.5em;
+    flex-direction: column;
+}
+.align-right{
+    text-align:right;
+    margin-left:auto;
+}
+.grid-span-2-col{
+    grid-column:span 2;
 }

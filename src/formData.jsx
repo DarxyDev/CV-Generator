@@ -5,6 +5,10 @@ const defaultFormData = {
     lastName: 'Smith',
     email: 'johnsmith@gmail.com',
     phone: '(978) 145-5563',
+    address: '647 Logic Way',
+    city: 'Boston',
+    state: 'MA',
+    summary:`Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, fugit nam ipsum a eveniet architecto aliquam explicabo modi facere iure vitae nihil debitis repellendus? Accusamus dolore soluta maiores inventore quo?`,
     skills: [
         { value: 'Critical Thinking', id: uuid() },
         { value: 'Javascript', id: uuid() },
@@ -32,8 +36,8 @@ const defaultFormData = {
         {
             position: 'Web Developer',
             employer: 'Milestone Inc.',
-            address: '173 Kraken St',
             phone: '(978) 122 3887',
+            address: '173 Kraken St',
             city: 'Boston',
             state: 'MA',
             startYear: '2016',
@@ -43,8 +47,8 @@ const defaultFormData = {
         },        {
             position: 'Wizard',
             employer:"Potter's Lot O' Pots",
-            address: '1123 Magic Ln',
             phone: '(978) 342 6631',
+            address: '1123 Magic Ln',
             city: 'Gnewton',
             state: 'MA',
             startYear: '1942',
