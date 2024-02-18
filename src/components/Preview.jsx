@@ -17,7 +17,7 @@ export default function Preview({ formData }) {
     if (!(resizeAdded = false) && onLoadResize(pageSettings))
         window.onresize = (e) => { onWindowResize(pageSettings) };
     return (
-        <div className='right-half main-section Preview'  style={{ fontFamily: pageSettings.fontFamily }}>
+        <div className='right-half main-section Preview' style={{ fontFamily: pageSettings.fontFamily }}>
             <PageSettings {...{ pageSettings, setPageSettings, color1: 1, color2: 1, color3: 1 }} />
             <Page {...{ formData, pageSettings }}></Page>
             <PageSettings {...{ pageSettings, setPageSettings, scale: 1, fontSettings: 1 }} />
@@ -88,18 +88,19 @@ function FontSettings({ pageSettings, setPageSettings }) {
         setPageSettings({ ...pageSettings, fontFamily: value });
     }
     const fontFamilies = [];
-    fontCheck.forEach((fontFamily)=>{
+    fontCheck.forEach((fontFamily) => {
         fontFamilies.push(<option value={fontFamily} key={fontFamily + 'akslfjlaskfasldkfja'}>{fontFamily}</option>)
     })
     return (
-        <div className='FontSettings'>
-            <select value={pageSettings.fontSize} onChange={setFontSize}>
-                {fontSizes.map((item) => item)}
-            </select>
-            <select value={pageSettings.fontFamily} onChange={setFontFamily}>
-                {fontFamilies.map((item)=>item)}
-            </select>
-        </div>
+            <div className='FontSettings'>
+                <select value={pageSettings.fontSize} onChange={setFontSize}>
+                    {fontSizes.map((item) => item)}
+                </select>
+                <select value={pageSettings.fontFamily} onChange={setFontFamily}>
+                    {fontFamilies.map((item) => item)}
+                </select>
+            </div>
+
     )
 }
 

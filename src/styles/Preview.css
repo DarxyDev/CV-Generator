@@ -69,6 +69,17 @@
     display:flex;
     gap:30px;
 }
+.Preview .PageSettingsContainer{
+    position:fixed;
+    display:flex;
+    align-items:center;
+}
+.Preview .PageSettingsContainer:first-child{
+    top:10px;
+}
+.Preview .PageSettingsContainer:last-child{
+    bottom:10px;
+}
 .Preview .FontSettings{
     
 }

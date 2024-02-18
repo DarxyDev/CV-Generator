@@ -18,3 +18,5 @@ const fontCheck = new Set([
     return fontAvailable;
   })();
   export default fontCheck
+
+  //source: https://stackoverflow.com/questions/3368837/list-every-font-a-users-browser-can-display
