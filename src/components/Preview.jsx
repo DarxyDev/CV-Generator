@@ -1,12 +1,62 @@
 import '../styles/Preview.css'
+import { useState } from 'react';
+
+
+const PAGE_RATIO = 1 / 1.414;
+let resizeAdded = false;
 export default function Preview({ formData }) {
+    const [pageSettings, setPageSettings] = useState({
+        scale: .95,
+    })
+    if (!(resizeAdded = false) && onLoadResize(pageSettings))
+        window.onresize = (e) => { onWindowResize(pageSettings) };
     return (
         <div className='right-half main-section Preview'>
+            <PageSettings {...{pageSettings, setPageSettings}}/>
             <Page formData={formData}></Page>
         </div>
     )
 }
+const onWindowResize = (settings) => {
+    const page = document.querySelector('.Page');
+    const container = document.querySelector('.Page-container');
+    const size = container.offsetHeight >= container.offsetWidth ?
+        container.offsetWidth :
+        container.offsetHeight;
+    const newHeight = size * settings.scale;
+    const newWidth = size * settings.scale * PAGE_RATIO;
 
+    page.style.height = newHeight + 'px';
+    page.style.width = newWidth + 'px';
+    page.style.fontSize = (settings.scale * 2) + 'vh';
+};
+
+function onLoadResize(settings) {
+    const container = document.querySelector('.Page');
+    if (!container)
+        setTimeout(() => onLoadResize(settings), 10)
+    else onWindowResize(settings);
+    return true;
+}
+
+function PageSettings({ pageSettings, setPageSettings }) {
+    function setScale(value){
+        setPageSettings({...pageSettings,scale:value});
+    }
+    return (
+        <div>
+            <Slider value={pageSettings.scale} setValue={setScale}/>
+        </div>
+    )
+}
+function Slider({ value, setValue }) {
+    function onChange(e) {
+        setValue((e.target.value) / 100)
+    }
+    return (
+        <input type='range' min={20} max={98} value={value * 100} onChange={onChange}></input>
+    )
+}
 function Page({ formData }) {
     const childProps = { formData }
     return (
