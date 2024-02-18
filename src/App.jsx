@@ -37,6 +37,6 @@ window.onresize = onWindowResize;
 (function onLoadResize() {
   const page = document.querySelector('.Page');
   if (!page)
-    setTimeout(onLoadResize, 20)
+    setTimeout(onLoadResize, 10)
   else onWindowResize();
 })()

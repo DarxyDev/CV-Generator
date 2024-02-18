@@ -36,7 +36,7 @@ function ContactInfo({ formData }) {
     function ContactSection({ title, value }) {
         if (value === '') return (<></>);
         return (
-            <div>
+            <div className='ContactInfo'>
                 <h2>{title}</h2>
                 <p>{value}</p>
             </div>
@@ -52,7 +52,7 @@ function ContactInfo({ formData }) {
 }
 function Skills({ formData }) {
     return (
-        <ul>
+        <ul className='Skills'>
             {formData.skills.map(item => {
                 return (
                     <li key={item.id}>{item.value}</li>
@@ -63,7 +63,7 @@ function Skills({ formData }) {
 }
 function Education({ formData }) {
     return (
-        <ul>
+        <ul className='Education'>
             {formData.education.map(item => {
                 return (
                     <li key={item.id}>
