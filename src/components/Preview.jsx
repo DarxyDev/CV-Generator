@@ -1,5 +1,6 @@
 import '../styles/Preview.css'
 import { useState } from 'react';
+import fontCheck from '../FontCheck';
 
 
 const PAGE_RATIO = 1 / 1.414;
@@ -10,15 +11,16 @@ export default function Preview({ formData }) {
         color1: '#7a84f8',
         color2: '#bac6f5',
         color3: '#f2f4ff',
+        font: 'Helvetica',
         fontSize: 18,
     })
     if (!(resizeAdded = false) && onLoadResize(pageSettings))
         window.onresize = (e) => { onWindowResize(pageSettings) };
     return (
-        <div className='right-half main-section Preview'>
-            <PageSettings {...{ pageSettings, setPageSettings,color1:1,color2:1,color3:1 }} />
+        <div className='right-half main-section Preview'  style={{ fontFamily: pageSettings.fontFamily }}>
+            <PageSettings {...{ pageSettings, setPageSettings, color1: 1, color2: 1, color3: 1 }} />
             <Page {...{ formData, pageSettings }}></Page>
-            <PageSettings {...{ pageSettings, setPageSettings, scale:1, fontSettings:1}} />
+            <PageSettings {...{ pageSettings, setPageSettings, scale: 1, fontSettings: 1 }} />
         </div>
     )
 }
@@ -44,14 +46,10 @@ function onLoadResize(settings) {
     return true;
 }
 
-function PageSettings({ pageSettings, setPageSettings, color1,color2,color3,scale,fontSettings }) {
+function PageSettings({ pageSettings, setPageSettings, color1, color2, color3, scale, fontSettings }) {
     function setScale(e) {
         const value = ((e.target.value) / 100);
-        console.log(value)
         setPageSettings({ ...pageSettings, scale: value });
-    }
-    function setFontSize(e){
-
     }
     function setColor1(e) {
         const value = e.target.value;
@@ -71,27 +69,40 @@ function PageSettings({ pageSettings, setPageSettings, color1,color2,color3,scal
             {color1 && <ColorSelect value={pageSettings.color1} setValue={setColor1} />}
             {color2 && <ColorSelect value={pageSettings.color2} setValue={setColor2} />}
             {color3 && <ColorSelect value={pageSettings.color3} setValue={setColor3} />}
-            {fontSettings && <FontSettings {...{pageSettings, setPageSettings}}/>}
+            {fontSettings && <FontSettings {...{ pageSettings, setPageSettings }} />}
         </div>
     )
 }
-function FontSettings({pageSettings, setPageSettings}){
-    function setFontSize(e){
+function FontSettings({ pageSettings, setPageSettings }) {
+    function setFontSize(e) {
         const value = e.target.value
         setPageSettings({ ...pageSettings, fontSize: value });
     }
-    const fontOptions = [];
-    for(let i = 10; i < 65; i++){
-        fontOptions.push(<option value={i} key={i+"dslkfsdf94maslkdmfaslkdmc9smv3c"}>{i}</option>)
+
+    const fontSizes = [];
+    for (let i = 10; i < 65; i++) {
+        fontSizes.push(<option value={i} key={i + "dslkfsdf94maslkdmfaslkdmc9smv3c"}>{i}</option>)
     }
+    function setFontFamily(e) {
+        const value = e.target.value;
+        setPageSettings({ ...pageSettings, fontFamily: value });
+    }
+    const fontFamilies = [];
+    fontCheck.forEach((fontFamily)=>{
+        fontFamilies.push(<option value={fontFamily} key={fontFamily + 'akslfjlaskfasldkfja'}>{fontFamily}</option>)
+    })
     return (
         <div className='FontSettings'>
-            <select value={pageSettings.fontSize}onChange={setFontSize}>
-                {fontOptions.map((item)=>item)}
+            <select value={pageSettings.fontSize} onChange={setFontSize}>
+                {fontSizes.map((item) => item)}
+            </select>
+            <select value={pageSettings.fontFamily} onChange={setFontFamily}>
+                {fontFamilies.map((item)=>item)}
             </select>
         </div>
     )
 }
+
 function Slider({ value, setValue }) {
     return (
         <input type='range' min={20} max={98} value={value * 100} onChange={setValue}></input>
