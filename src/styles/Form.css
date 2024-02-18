@@ -4,51 +4,72 @@
     --Form_pad-large: .5em;
     --Form_pad-xlarge:.75em;
 
+    --Form_tint-dark-xlow:rgba(0,0,0,.1);
     --Form_tint-dark-low:rgba(0,0,0,.2);
     --Form_tint-light-low:rgba(255,255,255,.1);
 
     --Form_default_border:5px;
 }
-
-.Section {
+.Form{}
+.Form .Section {
     padding: var(--Form_pad-large);
 }
-
-.TitleInput {
+.Form .Section:nth-child(2n - 1){
+    background-color: var(--Form_tint-dark-low);
+}
+.Form .Section-content{
+    padding:.25rem;
+    margin:.25rem;
+    border-radius:var(--Form_default_border)
+}
+.Form .TitleInput {
     padding: var(--Form_pad-med);
 }
 
-.TitleInput>h1 {
+.Form .TitleInput>h1 {
     padding: var(--Form_pad-small);
 }
 
-.AddItemButton {}
+.Form .AddItemButton {
+    width:100%;
+    background-color: var(--Form_tint-dark-low);
+    border-radius: var(--Form_default_border);
+    outline:none;
+}
+.Form .AddItemButton:hover{
+    background-color: var(--Form_tint-light-low);
+    cursor:pointer;
+}
 
-.ContactInfo {}
+.Form .ContactInfo {}
 
-.Skills {}
-.Skills > input {
+.Form .Skills {}
+.Form .Skills > input {
     margin: var(--Form_pad-small);
 }
 
-.Education {}
+.Form .Education {}
 
-.SC_selected{
-    background-color:var(--Form_tint-dark-low);
+.Form .SC_selected{
     border-radius: var(--Form_default_border);
 
 }
-.SC_selected, .SC_not-selected, .SC > .AddItemButton{
+.Form .SC_selected, .Form .SC_not-selected, .Form .SC .AddItemButton{
     margin-top: var(--Form_pad-large);
-    margin-left: var(--Form_pad-small);
     padding: var(--Form_pad-xlarge);
 
     border-radius: var(--Form_default_border);
     border: 1px grey solid;
 }
-.SC_not-selected:hover{
+.Form .SC_not-selected{
+    background-color:var(--Form_tint-dark-low);
+}
+.Form .SC_not-selected:hover{
     background-color: var(--Form_tint-light-low);
     cursor:pointer;
 }
 
-.Employment {}
+.Form .WorkHistory{}
+.Form .description-input{
+    width:80%;
+}

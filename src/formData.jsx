@@ -31,31 +31,25 @@ const defaultFormData = {
     workHistory: [
         {
             position: 'Web Developer',
+            employer: 'Milestone Inc.',
             address: '173 Kraken St',
             phone: '(978) 122 3887',
             city: 'Boston',
             state: 'MA',
             startYear: '2016',
             endYear: '2024',
-            description: `
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-        Vero dolorem consequuntur libero, mollitia eos architecto alias, 
-        temporibus corporis laborum soluta culpa asperiores optio 
-        voluptates earum quae voluptatem iusto laboriosam ipsa.`,
+            description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero dolorem consequuntur libero, mollitia eos architecto alias, temporibus corporis laborum soluta culpa asperiores optio voluptates earum quae voluptatem iusto laboriosam ipsa.`,
             id: uuid(),
         },        {
             position: 'Wizard',
+            employer:"Potter's Lot O' Pots",
             address: '1123 Magic Ln',
             phone: '(978) 342 6631',
             city: 'Gnewton',
             state: 'MA',
             startYear: '1942',
             endYear: '2003',
-            description: `
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-        Vero dolorem consequuntur libero, mollitia eos architecto alias, 
-        temporibus corporis laborum soluta culpa asperiores optio 
-        voluptates earum quae voluptatem iusto laboriosam ipsa.`,
+            description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero dolorem consequuntur libero, mollitia eos architecto alias, temporibus corporis laborum soluta culpa asperiores optio voluptates earum quae voluptatem iusto laboriosam ipsa.`,
             id: uuid(),
         },
     ],

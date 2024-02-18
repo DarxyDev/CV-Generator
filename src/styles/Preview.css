@@ -1,9 +1,17 @@
-#preview{
+.Preview{
+    height:100vh;
+    display:flex;
+    align-items: center;
+    justify-content: center;
 }
-#page{
-    margin: 0 auto;
-    width:80%;
+.Preview .Page{
     background-color: white;
-    aspect-ratio: 1/1.294;
     color:black;
+    font-size:2vh;
+    width:50%;
+}
+.Preview .Page-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

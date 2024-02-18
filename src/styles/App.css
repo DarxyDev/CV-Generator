@@ -11,22 +11,22 @@ html, body, #root{
 #main-container{ 
     height:100%;
     width:100%;
+    max-height:100%;
+    max-width:100%;
     box-sizing: border-box;
-    padding:.25rem;
     display:flex;
     gap:1px;
 }
 .left-half{
-    width:50%;
+    width:40%;
     min-height:100%;
 }
 .right-half{
-    width:50%;
-    min-height:100%;
+    width:60%;
+    height:100%;
 }
 .main-section{
     box-sizing:border-box;
-    padding:1rem;
     border-right:2px solid var(--tint-dark-30);
     border-radius:1.5vmin;
     overflow:scroll;
@@ -34,4 +34,16 @@ html, body, #root{
 .main-section:nth-child(2){
     border-right:none;
     border-left:2px solid var(--tint-dark-30);
+}
+.grid-2-col{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+}
+.grid-span-2{
+    grid-column:span 2;
+}
+.flex-center{
+    display:flex;
+    align-items: center;
+    justify-content: center;
 }
