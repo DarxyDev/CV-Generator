@@ -3,11 +3,14 @@ import { useState } from 'react';
 import fontCheck from '../FontCheck';
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//main export
 const PAGE_RATIO = 1 / 1.414;
 let resizeAdded = false;
 export default function Preview({ formData }) {
     const [pageSettings, setPageSettings] = useState({
-        scale: .9,
+        scale: .7,
         color1: '#7a84f8',
         color2: '#bac6f5',
         color3: '#f2f4ff',
@@ -27,6 +30,7 @@ export default function Preview({ formData }) {
 const onWindowResize = (settings) => {
     const page = document.querySelector('.Page');
     const container = document.querySelector('.Page-container');
+    console.log({x:container.offsetWidth,y:container.offsetHeight})
     const size = container.offsetHeight >= container.offsetWidth ?
         container.offsetWidth :
         container.offsetHeight;
@@ -45,7 +49,9 @@ function onLoadResize(settings) {
     else onWindowResize(settings);
     return true;
 }
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Settings Toolbar
 function PageSettings({ pageSettings, setPageSettings, color1, color2, color3, scale, fontSettings }) {
     function setScale(e) {
         const value = ((e.target.value) / 100);
@@ -116,6 +122,9 @@ function ColorSelect({ value, setValue }) {
         </div>
     )
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Main Page
 function Page({ formData, pageSettings }) {
     const childProps = { formData }
     return (

@@ -18,11 +18,11 @@ html, body, #root{
     gap:1px;
 }
 .left-half{
-    width:40%;
+    width:33.34%;
     min-height:100%;
 }
 .right-half{
-    width:calc(60%);
+    width:calc(66.66%);
     height:calc(100% );
 }
 .main-section{
